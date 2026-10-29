@@ -38,8 +38,8 @@ class Board
     end
 
     change_strength(winner_line)
-    @game_ended = false
-    Interface.end_game(player1)
+    current_player.score += 1
+    @game_ended = true
   end
 
   private

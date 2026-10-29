@@ -14,8 +14,8 @@ class Interface
   # Creates a method that displays the scores of the players in the CLI
   def display_scores
     puts "\n--------------------------"
-    print "#{@player1.name}  #{@player1.score.to_s.colorize(@player1.color)} x "
-    puts "#{@player2.score.to_s.colorize(@player2.color)}  #{@player2.name}"
+    print "#{@player1.name}  #{@player1.score.to_s.colorize(@player1.color).bold} x "
+    puts "#{@player2.score.to_s.colorize(@player2.color).bold}  #{@player2.name}"
     puts "--------------------------\n\n"
   end
 
@@ -30,16 +30,16 @@ class Interface
   end
 
   # End the game
-  def self.end_game(player)
+  def end_game
     puts "--------------------------"
-    puts "   #{player.name} Wins!"
+    puts "   #{@board.current_player.name} Wins!"
     puts "--------------------------"
 
     display_board
   end
 
   # Display a tie
-  def self.display_tie
+  def display_tie
     puts "--------------------------"
     puts "       It's a tie!"
     puts "--------------------------"

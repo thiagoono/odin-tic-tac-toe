@@ -5,24 +5,32 @@ require_relative "tic_tac_toe/interface"
 # Creates the players
 player1 = Player.new("Player 1", "X", :red)
 player2 = Player.new("Player 2", "O", :blue)
+answer = "Y"
 
-# Create the game and its interface
-game_test = Board.new(player1, player2)
-interface = Interface.new(player1, player2, game_test)
+while answer[0] == "Y"
+  # Create the game and its interface
+  game = Board.new(player1, player2)
+  interface = Interface.new(player1, player2, game)
 
-moves = 0
-# Repeat until someone wins or all the squares get filled
-until game_test.game_ended || moves == 9
-  interface.display_board
-  until game_test.current_player.make_a_move
-    # Display a warning saying it is an invalid move
-    puts "Invalid move!"
+  moves = 0
+  # Repeat until someone wins or all the squares get filled
+  until game.game_ended || moves == 9
     interface.display_board
+    until game.current_player.make_a_move
+      # Display a warning saying it is an invalid move
+      puts "Invalid move!"
+      interface.display_board
+    end
+    moves += 1
   end
-  moves += 1
+
+  # Display the tie screen or the winner screen
+  if game.game_ended
+    interface.end_game
+  else
+    interface.display_tie
+  end
+
+  Interface.play_again_screen
+  answer = gets.capitalize
 end
-
-display_tie unless game_test.game_ended
-
-interface.display_board
-Interface.play_again_screen
