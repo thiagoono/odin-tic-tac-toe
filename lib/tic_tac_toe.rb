@@ -1,42 +1,28 @@
 require_relative "tic_tac_toe/board"
 require_relative "tic_tac_toe/player"
+require_relative "tic_tac_toe/interface"
 
-player1 = Player.new("Player 1", "X")
-player2 = Player.new("Player 2", "O")
+# Creates the players
+player1 = Player.new("Player 1", "X", :red)
+player2 = Player.new("Player 2", "O", :blue)
 
+# Create the game and its interface
 game_test = Board.new(player1, player2)
+interface = Interface.new(player1, player2, game_test)
 
-game_test.display_scores
-game_test.display_board
+moves = 0
+# Repeat until someone wins or all the squares get filled
+until game_test.game_ended || moves == 9
+  interface.display_board
+  until game_test.current_player.make_a_move
+    # Display a warning saying it is an invalid move
+    puts "Invalid move!"
+    interface.display_board
+  end
+  moves += 1
+end
 
-game_test.current_player = player1
-player1.make_a_move
-game_test.display_board
-game_test.current_player = player2
-player2.make_a_move
-game_test.display_board
+display_tie unless game_test.game_ended
 
-game_test.current_player = player1
-player1.make_a_move
-game_test.display_board
-game_test.current_player = player2
-player2.make_a_move
-game_test.display_board
-
-game_test.current_player = player1
-player1.make_a_move
-game_test.display_board
-game_test.current_player = player2
-player2.make_a_move
-game_test.display_board
-
-game_test.current_player = player1
-player1.make_a_move
-game_test.display_board
-game_test.current_player = player2
-player2.make_a_move
-game_test.display_board
-
-game_test.current_player = player1
-player1.make_a_move
-game_test.display_board
+interface.display_board
+Interface.play_again_screen

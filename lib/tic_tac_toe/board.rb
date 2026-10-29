@@ -2,7 +2,7 @@ require "colorize"
 
 # Creates the class that will display the board and register the moves
 class Board
-  attr_reader :current_state
+  attr_reader :current_state, :player1, :player2
   attr_accessor :current_player, :game_ended
 
   # Initializes the object and create an array with all the moves of the players
@@ -16,6 +16,7 @@ class Board
     @game_ended = false
 
     @current_state = Array.new(3) { Array.new(3) }
+    @current_player = player1
   end
 
   # Creates the method to update the current state of the board and use it to check if the game is over
@@ -37,16 +38,17 @@ class Board
     end
 
     change_strength(winner_line)
-    Interface.end_game(current_player.name)
+    @game_ended = false
+    Interface.end_game(player1)
   end
 
   private
 
   def switch_turn
     @current_player = if current_player == @player1
-                        @player1
-                      else
                         @player2
+                      else
+                        @player1
                       end
   end
 
