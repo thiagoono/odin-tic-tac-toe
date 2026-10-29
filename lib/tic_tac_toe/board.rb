@@ -108,7 +108,7 @@ class Board
       row, column = indexes
       p indexes
 
-      current_state[row][column] = current_state[row][column].colorize.red
+      current_state[row][column] = current_state[row][column].red
     end
   end
 
