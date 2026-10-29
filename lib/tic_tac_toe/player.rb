@@ -15,6 +15,6 @@ class Player
 
     return false unless (move.is_a? Integer) || move < 1 || move > 9
 
-    puts @board.current_state[move / 3][move % 3] || @board.update_current_state(move / 3, move % 3, symbol)
+    @board.current_state[move / 3][move % 3] || @board.update_current_state(move / 3, move % 3, symbol)
   end
 end

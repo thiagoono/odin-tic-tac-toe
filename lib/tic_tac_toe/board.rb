@@ -27,11 +27,11 @@ class Board
 
   # Creates a method that displays the current state of the board in the CLI
   def display_board
-    puts " #{current_state[0][0] || ' '} | #{current_state[0][1] || ' '} | #{current_state[0][2] || ' '} "
+    puts " #{current_state[0][0] || '1'} | #{current_state[0][1] || '2'} | #{current_state[0][2] || '3'} "
     puts "---+---+---"
-    puts " #{current_state[1][0] || ' '} | #{current_state[1][1] || ' '} | #{current_state[1][2] || ' '} "
+    puts " #{current_state[1][0] || '4'} | #{current_state[1][1] || '5'} | #{current_state[1][2] || '6'} "
     puts "---+---+---"
-    puts " #{current_state[2][0] || ' '} | #{current_state[2][1] || ' '} | #{current_state[2][2] || ' '} "
+    puts " #{current_state[2][0] || '7'} | #{current_state[2][1] || '8'} | #{current_state[2][2] || '9'} "
   end
 
   # Creates the method to update the current state of the board and use it to check if the game is over
@@ -45,7 +45,7 @@ class Board
   def check_board(symbol)
     winner_line = check_rows(symbol)
     winner_line ||= check_columns(symbol)
-    winner_line ||= heck_diagonals(symbol)
+    winner_line ||= check_diagonals(symbol)
 
     return unless winner_line
 
@@ -58,6 +58,7 @@ class Board
     current_state.each_with_index do |row, index|
       return [[index, 0], [index, 1], [index, 2]] if row.uniq == [symbol]
     end
+    nil
   end
 
   # Checks for columns
@@ -67,6 +68,7 @@ class Board
 
       return [[0, i], [1, i], [2, i]]
     end
+    nil
   end
 
   # Checks for diagonals
@@ -75,9 +77,9 @@ class Board
       return [[0, 0], [1, 1], [2, 2]]
     end
 
-    return if [@current_state[0][2], @current_state[1][1], @current_state[2][0]].uniq == [symbol]
+    return nil unless [@current_state[0][2], @current_state[1][1], @current_state[2][0]].uniq == [symbol]
 
-    [[0, 2], [1, 1], [2, 2]]
+    [[0, 2], [1, 1], [2, 0]]
   end
 
   # End the game
@@ -87,7 +89,6 @@ class Board
     puts "--------------------------"
 
     display_board
-    play_again_screen
   end
 
   # Changes the color of the winning line
