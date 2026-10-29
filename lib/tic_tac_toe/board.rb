@@ -15,7 +15,7 @@ class Board
 
     @game_ended = false
 
-    @current_state = Array.new(Array.new(nil, 3), 3)
+    @current_state = Array.new(3, Array.new(3))
   end
 
   # Creates a method that displays the scores of the players in the CLI
