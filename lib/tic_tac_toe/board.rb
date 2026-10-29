@@ -31,10 +31,23 @@ class Board
     winner_line ||= check_columns(symbol)
     winner_line ||= check_diagonals(symbol)
 
-    return unless winner_line
+    unless winner_line
+      switch_turn
+      return
+    end
 
-    change_color(winner_line)
+    change_strength(winner_line)
     Interface.end_game(current_player.name)
+  end
+
+  private
+
+  def switch_turn
+    @current_player = if current_player == @player1
+                        @player1
+                      else
+                        @player2
+                      end
   end
 
   # Checks for rows
@@ -66,11 +79,11 @@ class Board
     [[0, 2], [1, 1], [2, 0]]
   end
 
-  # Changes the color of the winning line
-  def change_color(winner_line)
+  # Changes the strength of the winning line
+  def change_strength(winner_line)
     winner_line.each do |indexes|
       row, column = indexes
-      current_state[row][column] = current_state[row][column].red
+      current_state[row][column] = current_state[row][column].bold
     end
   end
 end
