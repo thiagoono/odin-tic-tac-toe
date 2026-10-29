@@ -1,10 +1,12 @@
+require "colorize"
+
 # Creates the class that will display the board and register the moves
 class Board
   attr_reader :current_state
   attr_accessor :current_player, :game_ended
 
   # Initializes the object and create an array with all the moves of the players
-  def initializer(player1, player2)
+  def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
 

@@ -2,7 +2,7 @@
 class Player
   attr_accessor :name, :score, :board, :symbol
 
-  def initializer(name, symbol)
+  def initialize(name, symbol)
     @name = name
     @score = 0
     @symbol = symbol
