@@ -30,21 +30,17 @@ class Interface
   end
 
   # End the game
-  def end_game
+  def self.end_game
     puts "--------------------------"
     puts "   #{@board.current_player.name} Wins!"
     puts "--------------------------"
-
-    display_board
   end
 
   # Display a tie
-  def display_tie
+  def self.display_tie
     puts "--------------------------"
     puts "       It's a tie!"
     puts "--------------------------"
-
-    display_board
   end
 
   # Displays the Play Again screen
@@ -52,5 +48,10 @@ class Interface
     puts "--------------------------"
     puts "    Play Again? (Y/N)"
     puts "--------------------------"
+  end
+
+  # Displays a warning saying an invalid move was made
+  def self.invalid_move
+    puts "\n\nWarning: Invalid move! Please try again.".colorize(color: :red, mode: :underline)
   end
 end

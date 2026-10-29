@@ -18,7 +18,7 @@ while answer[0] == "Y"
     interface.display_board
     until game.current_player.make_a_move
       # Display a warning saying it is an invalid move
-      puts "Invalid move!"
+      Interface.invalid_move
       interface.display_board
     end
     moves += 1
@@ -26,10 +26,11 @@ while answer[0] == "Y"
 
   # Display the tie screen or the winner screen
   if game.game_ended
-    interface.end_game
+    Interface.end_game
   else
-    interface.display_tie
+    Interface.display_tie
   end
+  interface.display_board
 
   Interface.play_again_screen
   answer = gets.capitalize
