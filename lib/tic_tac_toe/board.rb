@@ -1,6 +1,6 @@
 # Creates the class that will display the board and register the moves
 class Board
-  attr_accessor :current_state
+  attr_reader :current_state
 
   # Initializes the object and create an array with all the moves of the players
   def initializer(player1, player2)
@@ -27,5 +27,10 @@ class Board
     puts " #{current_state[1][0] || ' '} | #{current_state[1][1] || ' '} | #{current_state[1][2] || ' '} "
     puts "---+---+---"
     puts " #{current_state[2][0] || ' '} | #{current_state[2][1] || ' '} | #{current_state[2][2] || ' '} "
+  end
+
+  # Creates the method to update the current state of the board and use it to check if the game is over
+  def update_current_state(row, column, symbol)
+    @current_state[row][column] = symbol
   end
 end
