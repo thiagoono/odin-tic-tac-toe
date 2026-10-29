@@ -14,7 +14,7 @@ class Player
     puts "Type the #{name}'s move:"
     move = gets.to_i - 1
 
-    return false unless (move.is_a? Integer) || move < 1 || move > 9
+    return false unless (move.is_a? Integer) && move.between?(0, 8)
     return false if @board.current_state[move / 3][move % 3]
 
     @board.update_current_state(move / 3, move % 3, symbol)
