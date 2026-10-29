@@ -10,15 +10,24 @@ game_test.display_scores
 game_test.display_board
 
 player1.make_a_move
+game_test.display_board
 player2.make_a_move
+game_test.display_board
 
 player1.make_a_move
+game_test.display_board
 player2.make_a_move
+game_test.display_board
 
 player1.make_a_move
+game_test.display_board
 player2.make_a_move
+game_test.display_board
 
 player1.make_a_move
+game_test.display_board
 player2.make_a_move
+game_test.display_board
 
 player1.make_a_move
+game_test.display_board

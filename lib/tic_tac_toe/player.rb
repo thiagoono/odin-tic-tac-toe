@@ -10,10 +10,11 @@ class Player
 
   # Adds the logic to make a move and check if it is valid
   def make_a_move
+    puts "Type the #{name} move"
     move = gets.to_i
 
-    return false if (move.is_a? Integer) || move >= 1 || move <= 9
+    return false unless (move.is_a? Integer) || move < 1 || move > 9
 
-    @board.current_state[move / 3][move % 3] || @board.update_current_state(move / 3, move % 3, symbol)
+    puts @board.current_state[move / 3][move % 3] || @board.update_current_state(move / 3, move % 3, symbol)
   end
 end
