@@ -15,7 +15,7 @@ class Board
 
     @game_ended = false
 
-    @current_state = Array.new(3, Array.new(3))
+    @current_state = Array.new(3) { Array.new(3) }
   end
 
   # Creates a method that displays the scores of the players in the CLI
@@ -37,6 +37,7 @@ class Board
   # Creates the method to update the current state of the board and use it to check if the game is over
   def update_current_state(row, column, symbol)
     @current_state[row][column] = symbol
+
     check_board(symbol)
   end
 
@@ -64,13 +65,14 @@ class Board
   def check_columns(symbol)
     winner_column = nil
     (0..2).each do |i|
-      if [@current_state[0][i], @current_state[1][i], @current_state[2][i]].uniq == [symbol]
-        @any_winner = true
-        winner_column = [@current_state[0][i], @current_state[1][i], @current_state[2][i]]
-      end
+      next unless [@current_state[0][i], @current_state[1][i], @current_state[2][i]].uniq == [symbol]
+
+      winner_column = [[0, i], [1, i], [2, i]]
     end
 
     return unless winner_column
+
+    p winner_column
 
     change_color(winner_column)
     end_game
