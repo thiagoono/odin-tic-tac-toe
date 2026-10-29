@@ -51,8 +51,8 @@ class Board
   # Checks for rows
   def check_rows(symbol)
     winner_row = nil
-    current_state.each do |row|
-      winner_row = row if row.uniq == [symbol]
+    current_state.each_with_index do |row, index|
+      winner_row = [[index, 0], [index, 1], [index, 2]] if row.uniq == [symbol]
     end
 
     return unless winner_row
@@ -71,8 +71,6 @@ class Board
     end
 
     return unless winner_column
-
-    p winner_column
 
     change_color(winner_column)
     end_game
@@ -108,6 +106,7 @@ class Board
   def change_color(winner_line)
     winner_line.each do |indexes|
       row, column = indexes
+      p indexes
 
       current_state[row][column] = current_state[row][column].colorize.red
     end
