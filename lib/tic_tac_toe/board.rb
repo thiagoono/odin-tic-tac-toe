@@ -54,8 +54,10 @@ class Board
       winner_row = row if row.uniq == [symbol]
     end
 
+    return unless winner_row
+
     change_color(winner_row)
-    end_game if winner_row
+    end_game
   end
 
   # Checks for columns
@@ -68,8 +70,10 @@ class Board
       end
     end
 
+    return unless winner_column
+
     change_color(winner_column)
-    end_game if winner_column
+    end_game
   end
 
   # Checks for diagonals
@@ -82,8 +86,10 @@ class Board
       winner_diagonal ||= [[0, 2], [1, 1], [2, 2]]
     end
 
+    return unless winner_diagonal
+
     change_color(winner_diagonal)
-    end_game if winner_diagonal
+    end_game
   end
 
   # End the game
