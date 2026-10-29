@@ -72,8 +72,13 @@ class Board
 
   # Checks for diagonals
   def check_diagonals(symbol)
-    winner_diagonal = [@current_state[0][0], @current_state[1][1], @current_state[2][2]].uniq == [symbol]
-    winner_diagonal ||= [@current_state[0][2], @current_state[1][1], @current_state[2][0]].uniq == [symbol]
+    if [@current_state[0][0], @current_state[1][1], @current_state[2][2]].uniq == [symbol]
+      winner_diagonal = [[0, 0], [1, 1], [2, 2]]
+    end
+
+    if [@current_state[0][2], @current_state[1][1], @current_state[2][0]].uniq == [symbol]
+      winner_diagonal ||= [[0, 2], [1, 1], [2, 2]]
+    end
 
     change_color(winner_diagonal)
     end_game if winner_diagonal
@@ -91,8 +96,14 @@ class Board
 
   # Changes the color of the winning line
   def change_color(winner_line)
+    winner_line.each do |indexes|
+      row, column = indexes
+
+      current_state[row][column] = current_state[row][column].colorize.red
+    end
   end
 
   # Displays the Play Again screen
   def play_again_screen
+  end
 end
