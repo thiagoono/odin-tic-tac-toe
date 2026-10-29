@@ -105,5 +105,8 @@ class Board
 
   # Displays the Play Again screen
   def play_again_screen
+    puts "--------------------------"
+    puts "    Play Again? (Y/N)"
+    puts "--------------------------"
   end
 end
