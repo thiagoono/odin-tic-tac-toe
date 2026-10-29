@@ -18,22 +18,6 @@ class Board
     @current_state = Array.new(3) { Array.new(3) }
   end
 
-  # Creates a method that displays the scores of the players in the CLI
-  def display_scores
-    puts "--------------------------"
-    puts "#{@player1.name}  #{@player1.score} x #{@player2.score}  #{@player2.name}"
-    puts "--------------------------"
-  end
-
-  # Creates a method that displays the current state of the board in the CLI
-  def display_board
-    puts " #{current_state[0][0] || '1'} | #{current_state[0][1] || '2'} | #{current_state[0][2] || '3'} "
-    puts "---+---+---"
-    puts " #{current_state[1][0] || '4'} | #{current_state[1][1] || '5'} | #{current_state[1][2] || '6'} "
-    puts "---+---+---"
-    puts " #{current_state[2][0] || '7'} | #{current_state[2][1] || '8'} | #{current_state[2][2] || '9'} "
-  end
-
   # Creates the method to update the current state of the board and use it to check if the game is over
   def update_current_state(row, column, symbol)
     @current_state[row][column] = symbol
@@ -50,7 +34,7 @@ class Board
     return unless winner_line
 
     change_color(winner_line)
-    end_game
+    Interface.end_game(current_player.name)
   end
 
   # Checks for rows
@@ -80,15 +64,6 @@ class Board
     return nil unless [@current_state[0][2], @current_state[1][1], @current_state[2][0]].uniq == [symbol]
 
     [[0, 2], [1, 1], [2, 0]]
-  end
-
-  # End the game
-  def end_game
-    puts "--------------------------"
-    puts "  #{current_player.name} Wins!"
-    puts "--------------------------"
-
-    display_board
   end
 
   # Changes the color of the winning line
