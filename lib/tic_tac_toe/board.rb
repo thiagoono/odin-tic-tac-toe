@@ -43,53 +43,41 @@ class Board
 
   # Checks if there is a winner in the game
   def check_board(symbol)
-    check_rows(symbol)
-    check_columns(symbol)
-    check_diagonals(symbol)
+    winner_line = check_rows(symbol)
+    winner_line ||= check_columns(symbol)
+    winner_line ||= heck_diagonals(symbol)
+
+    return unless winner_line
+
+    change_color(winner_line)
+    end_game
   end
 
   # Checks for rows
   def check_rows(symbol)
-    winner_row = nil
     current_state.each_with_index do |row, index|
-      winner_row = [[index, 0], [index, 1], [index, 2]] if row.uniq == [symbol]
+      return [[index, 0], [index, 1], [index, 2]] if row.uniq == [symbol]
     end
-
-    return unless winner_row
-
-    change_color(winner_row)
-    end_game
   end
 
   # Checks for columns
   def check_columns(symbol)
-    winner_column = nil
     (0..2).each do |i|
       next unless [@current_state[0][i], @current_state[1][i], @current_state[2][i]].uniq == [symbol]
 
-      winner_column = [[0, i], [1, i], [2, i]]
+      return [[0, i], [1, i], [2, i]]
     end
-
-    return unless winner_column
-
-    change_color(winner_column)
-    end_game
   end
 
   # Checks for diagonals
   def check_diagonals(symbol)
     if [@current_state[0][0], @current_state[1][1], @current_state[2][2]].uniq == [symbol]
-      winner_diagonal = [[0, 0], [1, 1], [2, 2]]
+      return [[0, 0], [1, 1], [2, 2]]
     end
 
-    if [@current_state[0][2], @current_state[1][1], @current_state[2][0]].uniq == [symbol]
-      winner_diagonal ||= [[0, 2], [1, 1], [2, 2]]
-    end
+    return if [@current_state[0][2], @current_state[1][1], @current_state[2][0]].uniq == [symbol]
 
-    return unless winner_diagonal
-
-    change_color(winner_diagonal)
-    end_game
+    [[0, 2], [1, 1], [2, 2]]
   end
 
   # End the game
@@ -106,16 +94,7 @@ class Board
   def change_color(winner_line)
     winner_line.each do |indexes|
       row, column = indexes
-      p indexes
-
       current_state[row][column] = current_state[row][column].red
     end
-  end
-
-  # Displays the Play Again screen
-  def play_again_screen
-    puts "--------------------------"
-    puts "    Play Again? (Y/N)"
-    puts "--------------------------"
   end
 end

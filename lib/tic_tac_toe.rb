@@ -9,25 +9,34 @@ game_test = Board.new(player1, player2)
 game_test.display_scores
 game_test.display_board
 
+game_test.current_player = player1
 player1.make_a_move
 game_test.display_board
+game_test.current_player = player2
 player2.make_a_move
 game_test.display_board
 
+game_test.current_player = player1
 player1.make_a_move
 game_test.display_board
+game_test.current_player = player2
 player2.make_a_move
 game_test.display_board
 
+game_test.current_player = player1
 player1.make_a_move
 game_test.display_board
+game_test.current_player = player2
 player2.make_a_move
 game_test.display_board
 
+game_test.current_player = player1
 player1.make_a_move
 game_test.display_board
+game_test.current_player = player2
 player2.make_a_move
 game_test.display_board
 
+game_test.current_player = player1
 player1.make_a_move
 game_test.display_board
