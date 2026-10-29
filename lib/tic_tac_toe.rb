@@ -26,7 +26,7 @@ while answer[0] == "Y"
 
   # Display the tie screen or the winner screen
   if game.game_ended
-    Interface.end_game
+    interface.end_game
   else
     Interface.display_tie
   end

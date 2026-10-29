@@ -30,7 +30,7 @@ class Interface
   end
 
   # End the game
-  def self.end_game
+  def end_game
     puts "--------------------------"
     puts "   #{@board.current_player.name} Wins!"
     puts "--------------------------"
